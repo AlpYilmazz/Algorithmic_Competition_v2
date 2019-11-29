@@ -36,11 +36,11 @@ int find(int k){
 	// return find(ancestor[k]);
 }
 
-int Union(int a, int b){ // find(a) -> find(b)
+void Union(int a, int b){ // find(a) -> find(b)
 	ancestor[find(a)] = find(b);
 }
 
-void init_DSU{
+void init_DSU(){
 	for(int i = 0; i < N; i++){
 		ancestor[i] = i;
 	}
@@ -51,26 +51,26 @@ class custom_comparator_1{ // custom_comparator_1()
 		bool operator()(const pair<int,p_ii> &a, const pair<int,p_ii> &b){
 			return (a.first <= b.first);
 		}
-}
+};
 
 void kruskal(){
-	auto custom_comparator_2 = [](const auto &a, const auto &b){
-		return (a.first <= b.first);
-	}
+    auto custom_comparator_2 = [](const pair<lli,p_ii> &a, const pair<lli,p_ii> &b){
+        return (a.first <= b.first);
+    };
 
-	sort(edge.begin(), edge.end());
+    sort(edge.begin(), edge.end());
 
-	for(int i = 0; i < (int)edge.size(); i++){
-		int w = edge.first
-		int a = edge.second.first;
-		int b = edge.second.second;
-		if(find(a) != find(b)){
-			Union(a, b);
-			adj_mst[a].push_back(make_pair(b, w));
-			adj_mst[b].push_back(make_pair(a, w));
-			edge_mst.push_back(edge[i]);
-		}
-	}
+    for(lli i = 0; i < (lli)edge.size(); i++){
+        lli w = edge[i].first;
+        lli a = edge[i].second.first;
+        lli b = edge[i].second.second;
+        if(find(a) != find(b)){
+            Union(a, b);
+            adj_mst[a].push_back(make_pair(b, w));
+            adj_mst[b].push_back(make_pair(a, w));
+            edge_mst.push_back(edge[i]);
+        }
+    }
 }
 
 int main(){

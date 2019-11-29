@@ -28,28 +28,28 @@ vector<bool> visited(N);
 vector<int> color(N, -1);
 
 bool bipartite_check(){
-	queue<int> q;
-	int start = 0;
-	
-	color[start] = 0;
-	q.push(start);
-	while(!q.empty()){
-		int node = q.front();
-		q.pop();
+    queue<int> q;
+    int start = 1;
+    
+    color[start] = 0;
+    q.push(start);
+    while(!q.empty()){
+        int node = q.front();
+        q.pop();
 
-		for(auto u : adj[node]){
-			if(!visited[u]){
-				visited[u] = true;
-				
-				if(color[u] != -1 && color[u] == color[node]){
-					return false;
-				}
-
-				color[u] = (color[node]+1) % 2;
-				q.push(u);
-			}
-		}
-	}
+        if(visited[node]) continue;
+        visited[node] = true;
+        
+        for(auto u : adj[node]){
+            if(color[u] != -1 && color[u] == color[node]){
+                return false;
+            }
+            
+            color[u] = (color[node]+1) % 2;
+            q.push(u);
+        }
+    }
+    return true;
 }
 
 int main(){

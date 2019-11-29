@@ -29,28 +29,28 @@ vector<vector<p_ii>> adj(N); // a -> (b, w)
 vector<bool> visited(N, false); // added to mst
 
 void prim(){
-	priority_queue<pair<int,p_ii>, vector<pair<int,p_ii>>, greater<pair<int,p_ii>>> pq; // (w, (from, to))
-	int start = 0;
-	
-	pq.push(make_pair(0, make_pair(-1, start)));
-	while(!pq.empty()){
-		int from = pq.top().second.first
-		int node = pq.top().second.second;
-		int w = pq.top().first;
-		pq.pop();
+    priority_queue<pair<lli,p_ii>, vector<pair<int,p_ii>>, greater<pair<lli,p_ii>>> pq; // (w, (from, to))
+    lli start = 0;
+    
+    pq.push(make_pair(0, make_pair(-1, start)));
+    while(!pq.empty()){
+        lli from = pq.top().second.first;
+        lli node = pq.top().second.second;
+        lli w = pq.top().first;
+        pq.pop();
 
-		if(visited[node]) continue;
-		visited[node] = true;
-		
-		if(from != -1){
-			adj_mst[from].push_back(make_pair(node, w));
-			adj_mst[node].push_back(make_pair(from, w));
-		}
+        if(visited[node]) continue;
+        visited[node] = true;
+        
+        if(from != -1){
+            adj_mst[from].push_back(make_pair(node, w));
+            adj_mst[node].push_back(make_pair(from, w));
+        }
 
-		for(auto u : adj[node]){ // u: (to, w)
-			pq.push(make_pair(w, make_pair))
-		}
-	}
+        for(auto u : adj[node]){ // u: (to, w)
+            pq.push(make_pair(u.second, make_pair(node, u.first)));
+        }
+    }
 }
 
 int main(){

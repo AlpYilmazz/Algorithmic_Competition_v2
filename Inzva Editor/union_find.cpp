@@ -30,11 +30,11 @@ int find(int k){
 	// return find(ancestor[k]);
 }
 
-int Union(int a, int b){ // find(a) -> find(b)
+void Union(int a, int b){ // find(a) -> find(b)
 	ancestor[find(a)] = find(b);
 }
 
-void init_DSU{
+void init_DSU(){
 	for(int i = 0; i < N; i++){
 		ancestor[i] = i;
 	}
