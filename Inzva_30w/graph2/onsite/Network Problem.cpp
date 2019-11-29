@@ -18,7 +18,7 @@ lli prim(lli goal){
     priority_queue< p_ii, vector<p_ii>, greater<p_ii> > pq;
     lli cost = 0, total_nodes = 0;
     
-    pq.push(make_pair(0, 1));
+    pq.push(make_pair(0, 1)); // (w, des)
     while(!pq.empty()){
         lli node = pq.top().second;
         lli w = pq.top().first;
