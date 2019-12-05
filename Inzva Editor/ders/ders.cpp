@@ -21,47 +21,37 @@ typedef pair<lli,lli> p_ii;
 #define debug(x) cout << #x ": " << x << endl
 int bug = 1;
 
-#define N 10000
+vector<vector<int>> adj(N);
+vector<int> top_sort(N);
+vector<int> indegree(N);
 
-vector<int> ancestor(N);
+void topological_sort(){
+	queue<int> q;
 
-void init(){
 	for(int i = 0; i < N; i++){
-		ancestor[i] = i;
-	}
-}
-
-int find(int node){
-	if(ancestor[node] == node){
-		return node;
-	}
-	ancestor[node] = find(ancestor[node]);
-	return ancestor[node];
-}
-
-void Union(int a, int b){
-	ancestor[find(a)] = find(b);
-}
-
-vector<vector<pair<int,int>>> adj_mst(N); // adj[a] = (w, b)
-vector<pair<int,pair<int,int>>> edge_mst; // (w, (a, b))
-vector<pair<int,pair<int,int>>> edge(M); // (w, (a, b))
-
-void kruskal(){
-	sort(edge.begin(), edge.end());
-
-	for(int i = 0; i < M; i++){
-		int w = edge[i].first;
-		int a = edge[i].second.first;
-		int b = edge[i].second.second;
-		if(find(a) != find(b)){
-			Union(a, b);
-			edge_mst.push_back(edge[i]);
-			adj_mst[a].push_back(make_pair(w,b));
-			adj_mst[b].push_back(make_pair(w,a));
+		if(indegree[i] == 0){
+			q.push(i);
 		}
 	}
+
+	while(!q.empty()){
+		int node = q.front();
+		q.pop();
+
+		top_sort.push_back(node);
+
+		for(int i = 0; i < adj[node].size(); i++){
+			int u = adj[node][i];
+			indegree[u]--;
+
+			if(indegree[u] == 0){
+				q.push(u);
+			}
+		}
+	}
+
 }
+
 
 int main(){
 	IOS
